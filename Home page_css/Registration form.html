@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavender Flower Registration Form</title>
+    <style>
+        /* Flower background and lavender theme */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f7fe;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Flower decorations */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="%23b57edc" opacity="0.15"/><circle cx="30" cy="30" r="15" fill="%23d8bfd8" opacity="0.2"/><circle cx="70" cy="30" r="12" fill="%23e6e6fa" opacity="0.25"/><circle cx="30" cy="70" r="10" fill="%23dda0dd" opacity="0.2"/><circle cx="70" cy="70" r="14" fill="%23d8bfd8" opacity="0.15"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: -1;
+            animation: floatFlower 25s infinite linear;
+        }
+        
+        body::before {
+            top: 10%;
+            left: 5%;
+        }
+        
+        body::after {
+            bottom: 10%;
+            right: 5%;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+        
+        @keyframes floatFlower {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Main form styling - keeping your structure intact */
+        fieldset {
+            border: 5px solid #b57edc !important;
+            background-color: #f5f0fa !important;
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 15px 35px rgba(181, 126, 220, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Flower corner decorations */
+        fieldset::before, fieldset::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="20" fill="%23b57edc" opacity="0.3"/><circle cx="35" cy="35" r="12" fill="%23d8bfd8" opacity="0.4"/><circle cx="65" cy="35" r="10" fill="%23e6e6fa" opacity="0.5"/><circle cx="35" cy="65" r="8" fill="%23dda0dd" opacity="0.4"/><circle cx="65" cy="65" r="11" fill="%23d8bfd8" opacity="0.3"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        
+        fieldset::before {
+            top: 15px;
+            left: 15px;
+        }
+        
+        fieldset::after {
+            bottom: 15px;
+            right: 15px;
+            transform: rotate(180deg);
+        }
+        
+        /* Legend styling */
+        legend {
+            font-size: 28px;
+            font-weight: 700;
+            color: #6a4c9c;
+            padding: 15px 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #e6e6fa, #d8bfd8);
+            border-radius: 50px;
+            border: 3px solid #b57edc;
+            position: relative;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(181, 126, 220, 0.3);
+        }
+        
+        /* Small flower in legend */
+        legend::after {
+            content: "";
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="12" fill="%23967bb6"/><circle cx="35" cy="35" r="8" fill="%23d8bfd8"/><circle cx="65" cy="35" r="7" fill="%23e6e6fa"/><circle cx="35" cy="65" r="6" fill="%23dda0dd"/><circle cx="65" cy="65" r="9" fill="%23d8bfd8"/></svg>');
+            background-size: contain;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
+        }
+        
+        /* Form styling */
+        form {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Label styling */
+        lable {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #6a4c9c;
+            font-size: 16px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        lable::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="8" fill="%23b57edc" opacity="0.6"/><circle cx="40" cy="40" r="4" fill="%23e6e6fa"/><circle cx="60" cy="40" r="3" fill="%23f5f0fa"/><circle cx="40" cy="60" r="3" fill="%23dda0dd"/><circle cx="60" cy="60" r="5" fill="%23d8bfd8"/></svg>');
+            background-size: contain;
+        }
+        
+        /* Required field indicator */
+        lable[for*="*"]::after {
+            content: "*";
+            color: #e75480;
+            margin-left: 4px;
+        }
+        
+        /* Input field styling */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #d8bfd8;
+            border-radius: 12px;
+            font-size: 16px;
+            background-color: #fefbff;
+            color: #5d4a7a;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="date"]:focus {
+            outline: none;
+            border-color: #b57edc;
+            box-shadow: 0 0 0 3px rgba(181, 126, 220, 0.2);
+            background-color: white;
+        }
+        
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        input[type="password"]::placeholder {
+            color: #a990c9;
+            opacity: 0.7;
+        }
+        
+        /* Radio button styling */
+        input[type="radio"] {
+            margin: 15px 5px 15px 25px;
+            transform: scale(1.3);
+            accent-color: #b57edc;
+        }
+        
+        /* Style the radio button labels */
+        input[type="radio"] + label {
+            display: inline;
+            padding-left: 0;
+            margin-left: 5px;
+            font-weight: normal;
+            color: #5d4a7a;
+        }
+        
+        /* Remove the flower icon from radio labels */
+        input[type="radio"] + label::before {
+            display: none;
+        }
+        
+        /* Custom radio button look */
+        input[type="radio"] {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            margin: 20px 10px 20px 25px;
+            transform: scale(1.5);
+            accent-color: #b57edc;
+            cursor: pointer;
+        }
+        
+        /* Checkbox label */
+        input[type="checkbox"] + lable {
+            display: inline;
+            padding-left: 0;
+            margin-left: 5px;
+            font-weight: normal;
+            color: #5d4a7a;
+        }
+        
+        /* Remove flower icon from checkbox label */
+        input[type="checkbox"] + lable::before {
+            display: none;
+        }
+        
+        /* Button styling - keeping your inline styles but enhancing them */
+        input[type="Submit"] {
+            background: linear-gradient(135deg, #7fffd4, #5ad4b4) !important;
+            color: #2d5d4e;
+            border: none;
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+            margin-right: 15px;
+            box-shadow: 0 5px 15px rgba(127, 255, 212, 0.3);
+        }
+        
+        input[type="Submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(127, 255, 212, 0.4);
+            background: linear-gradient(135deg, #8affdd, #6ae4c4) !important;
+        }
+        
+        input[type="Reset"] {
+            background: linear-gradient(135deg, #6a5acd, #5a4ac4) !important;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+            box-shadow: 0 5px 15px rgba(106, 90, 205, 0.3);
+        }
+        
+        input[type="Reset"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 90, 205, 0.4);
+            background: linear-gradient(135deg, #7a6add, #6a5ad4) !important;
+        }
+        
+        /* Line breaks styling */
+        br {
+            margin-bottom: 5px;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            fieldset {
+                padding: 20px;
+            }
+            
+            legend {
+                font-size: 24px;
+                padding: 12px 20px;
+            }
+            
+            input[type="Submit"],
+            input[type="Reset"] {
+                padding: 12px 25px;
+                font-size: 16px;
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            input[type="Reset"] {
+                margin-top: 0;
+            }
+        }
+        
+        /* Focus effect for accessibility */
+        input:focus, button:focus {
+            outline: 2px solid #b57edc;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your exact HTML code - untouched -->
+    <fieldset style="border: 5px solid powderblue; background-color: lavender;">
+        <legend> Registration Form </legend>
+        <form> 
+            <lable for="Name"> Name* </lable> 
+            <br>
+            <input type="text" placeholder="Jane Doe" required/>
+            <br>
+            <lable for="E-mail"> E-mail* </lable> 
+            <br>
+            <input type="email" placeholder="Janedoe@123" required />
+            <br>
+            <lable for="Password"> Password* </lable> 
+            <br>
+            <input type="password" placeholder="Min 8 Characters" required />
+            <br>
+            <lable for="Date of Birth"> Date of Birth </lable> 
+            <br>
+            <input type="date" placeholder="dd-mm-yy" required />
+            <br>
+
+            <lable for="Gender"> Gender </lable> 
+            <br>
+
+            <input type="radio"  name="Gender" > Female
+            <input type="radio"  name="Gender" > Male
+            <br>
+            <input type="checkbox" value=" "/> 
+            <lable> I agree to terms* </lable>
+            <br>
+            <input type="Submit" style="background-color: aquamarine;"/> 
+            <input type="Reset" style="background-color: slateblue;"/> 
+        </form>
+    </fieldset>
+    
+    <script>
+        // Add subtle interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add focus effects to inputs
+            const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"], input[type="date"]');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Add a subtle animation to the form on load
+            const fieldset = document.querySelector('fieldset');
+            fieldset.style.opacity = '0';
+            fieldset.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                fieldset.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                fieldset.style.opacity = '1';
+                fieldset.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

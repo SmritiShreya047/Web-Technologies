@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form | Smriti</title>
+    <style>
+        /* Green theme background and decorations */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f7f0;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Leaf decorations instead of flowers */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 Q70,20 60,40 Q80,30 70,50 Q90,40 80,60 Q70,80 50,70 Q30,80 20,60 Q10,40 30,50 Q20,30 40,40 Q30,20 50,10Z" fill="%2382b74d" opacity="0.15"/><path d="M30,30 Q40,20 50,30 Q60,40 45,45 Q40,55 30,50 Q20,45 30,30Z" fill="%235a8c3e" opacity="0.2"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: -1;
+            animation: floatLeaf 20s infinite alternate ease-in-out;
+        }
+        
+        body::before {
+            top: 5%;
+            left: 3%;
+            transform: rotate(-15deg);
+        }
+        
+        body::after {
+            bottom: 5%;
+            right: 3%;
+            animation-duration: 25s;
+            transform: rotate(45deg);
+        }
+        
+        @keyframes floatLeaf {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-30px) rotate(15deg); }
+        }
+        
+        /* Additional floating leaves */
+        .leaf-decoration {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,50 Q35,30 50,40 Q65,30 75,50 Q85,70 60,70 Q45,85 30,70 Q15,60 20,50Z" fill="%2390be6d" opacity="0.15"/><circle cx="45" cy="45" r="5" fill="%23f9d71c" opacity="0.3"/></svg>');
+            background-size: contain;
+            z-index: -1;
+            animation: floatRandom 18s infinite alternate;
+        }
+        
+        .leaf-1 {
+            top: 20%;
+            right: 10%;
+            animation-duration: 22s;
+        }
+        
+        .leaf-2 {
+            bottom: 20%;
+            left: 8%;
+            animation-duration: 19s;
+            transform: scaleX(-1);
+        }
+        
+        .leaf-3 {
+            top: 40%;
+            left: 15%;
+            animation-duration: 24s;
+        }
+        
+        @keyframes floatRandom {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(20px, -20px) rotate(30deg); }
+        }
+        
+        /* Main form styling - green theme */
+        fieldset {
+            border: 5px solid #5a8c3e !important;
+            background-color: #f4faf0 !important;
+            border-radius: 25px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(90, 140, 62, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Green gradient border effect */
+        fieldset::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #5a8c3e, #82b74d, #c1e1a0, #5a8c3e);
+            border-radius: 27px;
+            z-index: -2;
+            animation: borderGlow 4s infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* Leaf corner decorations */
+        fieldset::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M25,30 Q40,15 55,25 Q70,35 60,50 Q75,60 55,70 Q35,80 30,60 Q15,50 25,30Z" fill="%2382b74d" opacity="0.3"/><path d="M40,40 Q45,35 52,40 Q58,48 45,48 Q40,55 38,45 Q30,42 40,40Z" fill="%235a8c3e" opacity="0.4"/></svg>');
+            background-size: contain;
+            bottom: 15px;
+            right: 15px;
+            transform: rotate(15deg);
+            z-index: 0;
+        }
+        
+        /* Legend styling - green theme */
+        legend {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d5a27;
+            padding: 12px 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #c1e1a0, #82b74d);
+            border-radius: 50px;
+            border: 3px solid #5a8c3e;
+            position: relative;
+            letter-spacing: 1.5px;
+            box-shadow: 0 8px 20px rgba(90, 140, 62, 0.3);
+            margin-bottom: 15px;
+        }
+        
+        /* Small leaf in legend */
+        legend::after {
+            content: "🌿";
+            position: absolute;
+            font-size: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 25px;
+        }
+        
+        /* Form styling */
+        form {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Label styling - with green leaves */
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2d5a27;
+            font-size: 15px;
+            position: relative;
+            padding-left: 22px;
+        }
+        
+        label::before {
+            content: "🌱";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* Required field indicator */
+        label[for="Name"]::after,
+        label[for="Email"]::after,
+        label[for="Subject"]::after,
+        label[for="Message"]::after {
+            content: "*";
+            color: #e63946;
+            margin-left: 4px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* Input field styling - green theme */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 95%;
+            padding: 10px 12px;
+            border: 2px solid #c1e1a0;
+            border-radius: 12px;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #2d5a27;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-top: 2px;
+            margin-bottom: 5px;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #5a8c3e;
+            box-shadow: 0 0 0 4px rgba(90, 140, 62, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        input[type="tel"]::placeholder,
+        textarea::placeholder {
+            color: #a8c99a;
+            font-style: italic;
+        }
+        
+        /* Select dropdown styling */
+        select {
+            width: 97%;
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%235a8c3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        /* Textarea specific */
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        /* Button styling - keeping your colors */
+        input[type="submit"] {
+            background-color: #7fffd4 !important; /* aquamarine */
+            color: #2d5a27;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(127, 255, 212, 0.4);
+            margin-right: 10px;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #6ae6c0 !important;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(127, 255, 212, 0.5);
+        }
+        
+        input[type="reset"] {
+            background-color: #6a5acd !important; /* slateblue */
+            color: white !important;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(106, 90, 205, 0.4);
+            margin-left: 10px;
+        }
+        
+        input[type="reset"]:hover {
+            background-color: #7a6add !important;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(106, 90, 205, 0.5);
+        }
+        
+        /* Button container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0 10px;
+        }
+        
+        /* Required fields note */
+        p {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        p::before {
+            content: "🌿 ";
+            color: #5a8c3e;
+        }
+        
+        p::after {
+            content: " 🌿";
+            color: #5a8c3e;
+        }
+        
+        /* Add subtle animation */
+        form > * {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Stagger animations */
+        label:nth-of-type(1) { animation-delay: 0.1s; }
+        input:nth-of-type(1) { animation-delay: 0.15s; }
+        label:nth-of-type(2) { animation-delay: 0.2s; }
+        input:nth-of-type(2) { animation-delay: 0.25s; }
+        label:nth-of-type(3) { animation-delay: 0.3s; }
+        input:nth-of-type(3) { animation-delay: 0.35s; }
+        label:nth-of-type(4) { animation-delay: 0.4s; }
+        select { animation-delay: 0.45s; }
+        label:nth-of-type(5) { animation-delay: 0.5s; }
+        textarea { animation-delay: 0.55s; }
+        
+        /* Responsive design */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            
+            fieldset {
+                padding: 20px;
+            }
+            
+            legend {
+                font-size: 24px;
+                padding: 10px 25px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            input[type="submit"],
+            input[type="reset"] {
+                width: 100%;
+                margin: 5px 0 !important;
+            }
+        }
+        
+        /* Focus effect for accessibility */
+        input:focus, button:focus, select:focus, textarea:focus {
+            outline: 3px solid #82b74d;
+            outline-offset: 2px;
+        }
+        
+        /* Success message styling */
+        .success-message {
+            text-align: center;
+            color: #2d5a27;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(130, 183, 77, 0.2);
+            display: none;
+            font-weight: bold;
+            font-size: 18px;
+            border: 2px solid #5a8c3e;
+        }
+        
+        /* Sparkle effects */
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: #f9d71c;
+            opacity: 0;
+            animation: sparkle 3s infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 0.8; transform: scale(1.5); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Additional leaf decorations -->
+    <div class="leaf-decoration leaf-1"></div>
+    <div class="leaf-decoration leaf-2"></div>
+    <div class="leaf-decoration leaf-3"></div>
+    
+    <!-- Main form - Your exact HTML structure preserved -->
+    <fieldset>
+        <legend> 📝 Contact Me </legend>
+        
+        <form action="mailto:your-email@example.com" method="post" enctype="text/plain" id="contactForm">
+            
+            <label for="Name"> Full Name* </label> 
+            <br>
+            <input type="text" id="Name" name="Name" placeholder="John Doe" required style="width: 95%; padding: 8px;"/>
+            <br>
+            <br>
+            
+            <label for="Email"> Email Address* </label> 
+            <br>
+            <input type="email" id="Email" name="Email" placeholder="john@example.com" required style="width: 95%; padding: 8px;"/>
+            <br>
+            <br>
+            
+            <label for="Phone"> Phone Number </label> 
+            <br>
+            <input type="tel" id="Phone" name="Phone" placeholder="+1 234 567 8900" style="width: 95%; padding: 8px;"/>
+            <br>
+            <br>
+            
+            <label for="Subject"> Subject* </label> 
+            <br>
+            <select id="Subject" name="Subject" required style="width: 97%; padding: 8px;">
+                <option value="" disabled selected>-- Select a subject --</option>
+                <option value="General Inquiry">To connect</option>
+                <option value="Technical Support">Say Hi</option>
+                <option value="Business Proposal">Message back</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Other">Other</option>
+            </select>
+            <br>
+            <br>
+            
+            <label for="Message"> Your Message* </label> 
+            <br>
+            <textarea id="Message" name="Message" rows="5" cols="30" placeholder="Write your message here..." required style="width: 95%; padding: 8px;"></textarea>
+            <br>
+            <br>
+            
+            <div class="button-container">
+                <input type="submit" value="📨 Send Message" style="background-color: aquamarine; padding: 8px 15px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold;"/> 
+                
+                <input type="reset" value="🗑️ Clear Form" style="background-color: slateblue; color: white; padding: 8px 15px; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; margin-left: 10px;"/>
+            </div>
+            
+            <p style="font-size: 12px; color: gray; margin-top: 15px;">* Required fields</p>
+        </form>
+        
+        <!-- Success message (hidden by default) -->
+        <div class="success-message" id="successMessage">
+            <span>Hi! Smriti here. 🌿 Your message has been sent!</span>
+        </div>
+    </fieldset>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the form and success message
+            const form = document.getElementById('contactForm');
+            const successMsg = document.getElementById('successMessage');
+            
+            // Add focus effects to inputs
+            const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Handle form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('Name').value;
+                const email = document.getElementById('Email').value;
+                const subject = document.getElementById('Subject').value;
+                const message = document.getElementById('Message').value;
+                
+                // Simple validation
+                if (name && email && subject && message && subject !== '-- Select a subject --') {
+                    // Show success message
+                    successMsg.style.display = 'block';
+                    
+                    // Add sparkle effect
+                    for (let i = 0; i < 8; i++) {
+                        setTimeout(() => createSparkle(), i * 100);
+                    }
+                    
+                    // Actually submit the form after showing success
+                    setTimeout(() => {
+                        form.submit(); // This will trigger the mailto
+                    }, 2000);
+                } else {
+                    alert('Please fill in all required fields! 🌱');
+                }
+            });
+            
+            // Clear success message on reset
+            form.addEventListener('reset', function() {
+                successMsg.style.display = 'none';
+            });
+            
+            // Function to create sparkle effect
+            function createSparkle() {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 90 + 5 + '%';
+                sparkle.style.top = Math.random() * 90 + 5 + '%';
+                sparkle.style.animationDelay = Math.random() * 1 + 's';
+                document.querySelector('fieldset').appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 3000);
+            }
+            
+            // Animate fieldset on load
+            const fieldset = document.querySelector('fieldset');
+            fieldset.style.opacity = '0';
+            fieldset.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                fieldset.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                fieldset.style.opacity = '1';
+                fieldset.style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Style the select when an option is chosen
+            const select = document.getElementById('Subject');
+            select.addEventListener('change', function() {
+                if (this.value) {
+                    this.style.color = '#2d5a27';
+                }
+            });
+            
+            // Add hover effect to legend
+            const legend = document.querySelector('legend');
+            legend.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            legend.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

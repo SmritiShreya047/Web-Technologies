@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="logo.jpg"/>
+    <!-- Note: You had duplicate link tags, kept one -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kala · घर</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4efe8;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.5;
+      color: #2d2a25;
+      padding: 1.8rem 1rem;
+    }
+
+    .page {
+      max-width: 1300px;
+      margin: 0 auto;
+      background: #fffbf7;
+      border-radius: 2.5rem;
+      padding: 2rem 2rem 2.8rem;
+      box-shadow: 0 12px 32px -12px rgba(70, 50, 35, 0.12);
+      border: 1px solid #e8ddd2;
+    }
+
+    a, button, .product-card, .wishlist-btn, .add-to-cart, .filter-tag {
+      transition: all 0.15s ease;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #e3d7cb;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 320;
+      color: #4e3f30;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      background: #e7d9cd;
+      border-radius: 60px;
+      padding: 0.2rem 1.3rem;
+      font-size: 0.9rem;
+      color: #4f3e2e;
+      font-weight: 430;
+    }
+
+    nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #4b3f33;
+      font-weight: 430;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 3px;
+    }
+
+    nav a:hover {
+      border-bottom-color: #c6aa92;
+      color: #6d523e;
+    }
+
+    .search-area {
+      display: flex;
+      background: #fcf6f0;
+      border-radius: 60px;
+      border: 1px solid #dbcec0;
+      padding: 0.2rem 0.2rem 0.2rem 1.5rem;
+      align-items: center;
+    }
+
+    .search-area input {
+      border: none;
+      background: transparent;
+      padding: 0.6rem 0.4rem;
+      font-size: 0.95rem;
+      min-width: 200px;
+      outline: none;
+      color: #322c25;
+    }
+
+    .search-area button {
+      background: #e2d2c2;
+      border: none;
+      border-radius: 60px;
+      padding: 0.5rem 1.8rem;
+      font-size: 1.2rem;
+      color: #4a3c2f;
+      cursor: pointer;
+    }
+
+    .search-area button:hover {
+      background: #d4c0ae;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-tag {
+      background: #f0e7de;
+      border-radius: 40px;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      border: 1px solid #dacbbb;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .filter-tag:hover {
+      background: #dfd0c1;
+      border-color: #b5987f;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem 1.8rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 2.2rem;
+      padding: 1.8rem 1.4rem 1.8rem;
+      border: 1px solid #eddacb;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.2s;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 20px 28px -12px #b9a48f4d;
+      background: #fefcf9;
+    }
+
+    figure {
+      background: #f2e6db;
+      border-radius: 2rem 2rem 1.2rem 1.2rem;
+      padding: 0.8rem 0.8rem 0.3rem 0.8rem;
+      margin: 0 0 1.2rem 0;
+      text-align: center;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* FIXED: Proper image styling */
+    .product-image {
+      width: 100%;
+      max-width: 180px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 1.2rem;
+      margin-bottom: 0.3rem;
+      border: 2px solid #e8d9cc;
+    }
+
+    figcaption {
+      font-size: 0.75rem;
+      color: #9b8471;
+      margin-top: 0.2rem;
+      letter-spacing: 0.3px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 380;
+      color: #463a2e;
+      margin: 0.25rem 0 0.2rem;
+    }
+
+    .price-inr {
+      font-size: 1.7rem;
+      font-weight: 420;
+      color: #aa7c5a;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin: 0.4rem 0 0.8rem;
+    }
+
+    .price-inr small {
+      font-size: 0.9rem;
+      color: #ab927f;
+      font-weight: 350;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.8rem;
+      margin: 1rem 0 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .add-to-cart {
+      background: #e7d8cb;
+      border: none;
+      border-radius: 60px;
+      padding: 0.6rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 480;
+      color: #3f3329;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      border: 1px solid #d2bcab;
+    }
+
+    .add-to-cart:hover {
+      background: #d4bfad;
+      color: #1f1813;
+      border-color: #b28d72;
+    }
+
+    .wishlist-btn {
+      background: transparent;
+      border: 1px solid #cfbfb0;
+      border-radius: 60px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      color: #6b5846;
+      cursor: pointer;
+    }
+
+    .wishlist-btn:hover {
+      background: #f5e9e0;
+      border-color: #b29279;
+    }
+
+    details {
+      background: #f3ebe3;
+      border-radius: 36px;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid #ddcdbc;
+      margin: 0.8rem 0 0rem;
+    }
+
+    summary {
+      font-weight: 440;
+      color: #604e3d;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::before {
+      content: "✚ ";
+      color: #b28d72;
+      font-size: 1.1rem;
+    }
+
+    details[open] summary::before {
+      content: "− ";
+    }
+
+    .detail-content {
+      padding: 0.6rem 0 0.2rem 1.5rem;
+      color: #54473c;
+    }
+
+    .stock-section {
+      background: #efe6dd;
+      border-radius: 4rem;
+      padding: 1.5rem 2rem;
+      margin: 2.2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.2rem;
+      align-items: center;
+    }
+
+    .stock-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    meter, progress {
+      width: 150px;
+      height: 20px;
+      border-radius: 30px;
+    }
+
+    meter::-webkit-meter-bar {
+      background: #d7c9bc;
+      border-radius: 30px;
+    }
+    meter::-webkit-meter-optimum-value {
+      background: #be9f86;
+      border-radius: 30px;
+    }
+    progress::-webkit-progress-bar {
+      background: #d7c9bc;
+      border-radius: 30px;
+    }
+    progress::-webkit-progress-value {
+      background: #be9f86;
+      border-radius: 30px;
+    }
+
+    dl {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem 4rem;
+      background: #f3ece4;
+      border-radius: 2.8rem;
+      padding: 1.8rem 2.2rem;
+      margin: 2rem 0;
+    }
+
+    dt {
+      font-weight: 530;
+      color: #6d5542;
+      border-left: 4px solid #d6bbaa;
+      padding-left: 0.8rem;
+    }
+
+    dd {
+      color: #5b4e43;
+      margin-left: 0.3rem;
+      margin-top: 0.1rem;
+    }
+
+    footer {
+      margin-top: 2.8rem;
+      border-top: 2px solid #e4d8cd;
+      padding-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    address {
+      font-style: normal;
+      color: #685d52;
+    }
+
+    .note-interactive {
+      text-align: center;
+      font-size: 0.85rem;
+      background: #eae0d6;
+      border-radius: 60px;
+      padding: 0.4rem 1.5rem;
+      display: inline-block;
+      margin: 1rem auto 0;
+    }
+
+    /* FIXED: Fallback for missing images */
+    .image-fallback {
+      display: none;
+      color: #8e735b;
+      font-size: 0.9rem;
+      padding: 1rem;
+      background: #ead9cb;
+      border-radius: 1.2rem;
+      width: 100%;
+      max-width: 180px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo-wrap">
+      <div class="logo">kala · घर</div>
+      <span>Handcrafted</span>
+    </div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Objects</a>
+      <a href="#">Textiles</a>
+      <a href="#">Paintings</a>
+    </nav>
+    <div class="search-area">
+      <input type="text" placeholder=" Search" list="product-suggestions">
+      <datalist id="product-suggestions">
+        <option value="Tea cup">
+        <option value="Woolen Hat">
+        <option value="Flower Vase">
+        <option value="Bamboo mat">
+      </datalist>
+      <button aria-label="search">🔍</button>
+    </div>
+  </header>
+
+  <div class="filter-row">
+    <span class="filter-tag">All products</span>
+    <span class="filter-tag">Ceramics</span>
+    <span class="filter-tag">Textiles</span>
+    <span class="filter-tag">Wood</span>
+    <span class="filter-tag">Under ₹2000</span>
+  </div>
+
+  <main>
+    <h1 style="font-size: 2.2rem; font-weight: 330; color: #483f35; margin-bottom: 0.2rem;">Handcrafted in India</h1>
+    <p style="color: #776b5f; margin-bottom: 2rem; ">━━ Every piece supports local artisans ━━</p>
+
+    <div class="product-grid">
+
+      <!-- product 1 - FIXED: Using proper img tag -->
+      <div class="product-card">
+        <figure>
+          <img src="tea_cup.jpeg" alt="Terracotta tea cup" class="product-image" 
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="image-fallback">⚠️ tea_cup.jpeg not found</div>
+          <figcaption>◌ Terracotta finish</figcaption>
+        </figure>
+        <h3>Tea cup</h3>
+        <div class="price-inr">₹ 890 <small>+ Handcrafted</small></div>
+        <div class="card-actions">
+          <button class="add-to-cart" onclick="alert('🛒 added to cart (demo)')">➕ Add to cart</button>
+          <button class="wishlist-btn" onclick="alert('❤️ saved to wishlist (demo)')">♡ Wishlist</button>
+        </div>
+        <details>
+          <summary>Details</summary>
+          <div class="detail-content">
+            <p>• 300 ml · handmade in kutch<br>• natural clay, food-safe<br>• Each piece varies slightly</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- product 2 - FIXED: Using proper img tag -->
+      <div class="product-card">
+        <figure>
+          <img src="wool_hat.jpeg" alt="Woolen hat" class="product-image"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="image-fallback">⚠️ wool_hat.jpeg not found</div>
+          <figcaption>🌾 Wool</figcaption>
+        </figure>
+        <h3>Woolen Hat</h3>
+        <div class="price-inr">₹ 1,450 <small>with a heart</small></div>
+        <div class="card-actions">
+          <button class="add-to-cart" onclick="alert('🛒 added linen towels (demo)')">➕ Add to cart</button>
+          <button class="wishlist-btn" onclick="alert('❤️ wishlist (demo)')">♡ Wishlist</button>
+        </div>
+        <details>
+          <summary>Details</summary>
+          <div class="detail-content">
+            <p>• 100% wool, stonewashed<br>• 50x70 cm · made in Bengaluru<br>• gets softer with every wash</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- product 3 - FIXED: Using proper img tag -->
+      <div class="product-card">
+        <figure>
+          <img src="flower_vase.jpeg" alt="Flower vase" class="product-image"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="image-fallback">⚠️ flower_vase.jpeg not found</div>
+          <figcaption>𓏲 hand‑pinched</figcaption>
+        </figure>
+        <h3>Flower Vase</h3>
+        <div class="price-inr">₹ 1,190 <small>small batch</small></div>
+        <div class="card-actions">
+          <button class="add-to-cart" onclick="alert('🛒 vase added (demo)')">➕ Add to cart</button>
+          <button class="wishlist-btn" onclick="alert('❤️ wishlist (demo)')">♡ Wishlist</button>
+        </div>
+        <details>
+          <summary>Details</summary>
+          <div class="detail-content">
+            <p>• matte glaze · 12 cm tall<br>• for dried or short stems<br>• handmade in Jaipur</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- product 4 - FIXED: Using proper img tag -->
+      <div class="product-card">
+        <figure>
+          <img src="bamboo_mat.jpeg" alt="Bamboo mat" class="product-image"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <div class="image-fallback">⚠️ bamboo_mat.jpeg not found</div>
+          <figcaption>🕊️ Bamboo wood</figcaption>
+        </figure>
+        <h3>Bamboo Mat</h3>
+        <div class="price-inr">₹ 2,490 <small>With cover</small></div>
+        <div class="card-actions">
+          <button class="add-to-cart" onclick="alert('🛒 cushion added (demo)')">➕ Add to cart</button>
+          <button class="wishlist-btn" onclick="alert('❤️ wishlist (demo)')">♡ Wishlist</button>
+        </div>
+        <details>
+          <summary>Details</summary>
+          <div class="detail-content">
+            <p>• cotton cover · colorful<br>• Foldable · 60x60 cm<br>• made in Maheshwar</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="stock-section">
+      <div class="stock-item">
+        <span>🧺 Wood in stock</span>
+        <meter value="0.65" min="0" max="1" low="0.2" high="0.8" optimum="0.9"></meter>
+      </div>
+      <div class="stock-item">
+        <span>🏺 Ceramic availability</span>
+        <progress value="42" max="100">42%</progress>
+      </div>
+      <div class="stock-item">
+        <span>🪡 Cotton restock</span>
+        <progress value="78" max="100">78%</progress>
+      </div>
+      <span style="color:#7c6857;"> All prices in ₹ (INR) </span>
+    </div>
+
+    <dl>
+      <div>
+        <dt>मिट्टी · clay</dt>
+        <dd>hand‑thrown stoneware, terracotta from Rajasthan</dd>
+      </div>
+      <div>
+        <dt>बुनाई · weave</dt>
+        <dd>wool, cotton, handloom from small clusters</dd>
+      </div>
+      <div>
+        <dt>लकड़ी · wood</dt>
+        <dd>sheesham, bamboo wood · carvings from Saharanpur</dd>
+      </div>
+      <div>
+        <dt> कला · Art</dt>
+        <dd>water color, paint · bihar & tamil nadu</dd>
+      </div>
+    </dl>
+
+    <figure style="margin: 2rem 0 0;">
+      <blockquote style="border-left: 5px solid #d1b9a6; padding-left: 2rem; color: #5d4e3f;">
+        “khadi, kauna, matka — every object tells a story from the subcontinent.”
+      </blockquote>
+      <figcaption style="margin-left: 2.5rem;">— गाँव connect / rural artisans</figcaption>
+    </figure>
+
+  </main>
+
+  <footer>
+    <address>
+      ✦ kala · घर ·  Bangalore, bharat · hello@kala.in
+    </address>
+    <div>
+      <span style="color:#7b6b5d;">रु · All prices in indian rupees</span>
+    </div>
+    <small>Buy the best quality products here</small>
+  </footer>
+  <p style="font-size:0.75rem; text-align:center; margin-top: 1rem; opacity: 0.6;"> </p>
+</div>
+</div>
+</body>
+</html>    

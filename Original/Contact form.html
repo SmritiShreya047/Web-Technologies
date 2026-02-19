@@ -1,0 +1,54 @@
+<head> 
+<link rel="stylesheet" href="style.css">
+</head>
+
+<fieldset style="border: 5px solid powderblue; background-color: lavender; width: 400px; margin: 0 auto;">
+<legend style="font-size: 20px; font-weight: bold;"> 📝 Contact Me </legend>
+
+<form action="mailto:your-email@example.com" method="post" enctype="text/plain">
+    
+    <label for="Name"> Full Name* </label> 
+    <br>
+    <input type="text" name="Name" placeholder="John Doe" required style="width: 95%; padding: 5px;"/>
+    <br>
+    <br>
+    
+    <label for="Email"> Email Address* </label> 
+    <br>
+    <input type="email" name="Email" placeholder="john@example.com" required style="width: 95%; padding: 5px;"/>
+    <br>
+    <br>
+    
+    <label for="Phone"> Phone Number </label> 
+    <br>
+    <input type="tel" name="Phone" placeholder="+1 234 567 8900" style="width: 95%; padding: 5px;"/>
+    <br>
+    <br>
+    
+    <label for="Subject"> Subject* </label> 
+    <br>
+    <select name="Subject" required style="width: 97%; padding: 5px;">
+        <option value="" disabled selected>-- Select a subject --</option>
+        <option value="General Inquiry">To connect</option>
+        <option value="Technical Support">Say Hi</option>
+        <option value="Business Proposal">Message back</option>
+        <option value="Feedback">Feedback</option>
+        <option value="Other">Other</option>
+    </select>
+    <br>
+    <br>
+    
+    <label for="Message"> Your Message* </label> 
+    <br>
+    <textarea name="Message" rows="5" cols="30" placeholder="Write your message here..." required style="width: 95%; padding: 5px;"></textarea>
+    <br>
+    <br>
+    
+    <input type="submit" value="📨 Send Message" style="background-color: aquamarine; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;"/> 
+    
+    <input type="reset" value="🗑️ Clear Form" style="background-color: slateblue; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 10px;"/>
+    
+    <p style="font-size: 12px; color: gray; margin-top: 15px;">* Required fields</p>
+</form>
+
+</fieldset>
