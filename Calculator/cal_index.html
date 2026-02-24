@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Calculators</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            color: #1a1a1a;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .calculators {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .card h2 {
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+        .html-only {
+            background: #ffd700;
+            color: #000;
+        }
+        .html-css {
+            background: #4169e1;
+            color: white;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+        .features {
+            text-align: left;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .features p {
+            margin: 8px 0;
+            color: #555;
+        }
+        .preview {
+            font-size: 14px;
+            color: #666;
+            font-family: monospace;
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 My Calculators</h1>
+        
+        <div class="calculators">
+            <!-- Calculator 1: HTML Only -->
+            <div class="card">
+                <span class="badge html-only">HTML Only</span>
+                <h2>Basic Calculator</h2>
+                <div class="preview">
+                    &lt;input&gt; + &lt;select&gt; + &lt;button&gt;<br>
+                    Basic operations with 2 numbers
+                </div>
+                <div class="features">
+                    <p>✓ Two number input</p>
+                    <p>✓ Dropdown for operations</p>
+                    <p>✓ Simple result display</p>
+                    <p>✓ No CSS styling</p>
+                </div>
+                <a href="calculator.html" class="btn" target="_blank">Open Calculator →</a>
+            </div>
+
+            <!-- Calculator 2: HTML + CSS -->
+            <div class="card">
+                <span class="badge html-css">HTML + CSS</span>
+                <h2>Phone Style Calculator</h2>
+                <div class="preview">
+                    📱 Grid layout + Colors<br>
+                    Multiple number operations
+                </div>
+                <div class="features">
+                    <p>✓ Phone style design</p>
+                    <p>✓ Number buttons (0-9)</p>
+                    <p>✓ Colored operators</p>
+                    <p>✓ Multiple number calculations</p>
+                </div>
+                <a href="calculator_css.html" class="btn" target="_blank">Open Calculator →</a>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div style="margin-top: 40px; background: white; padding: 20px; border-radius: 10px;">
+            <p style="color: #666;">✨ Click any calculator to open in new tab ✨</p>
+        </div>
+    </div>
+</body>
+</html>
