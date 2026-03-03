@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Timer</title>
+  <link rel="stylesheet" href="Exp_7.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Decorative circles -->
+    <div class="circle-decoration"></div>
+    <div class="circle-decoration-2"></div>
+    
+    <h2 style="color: #666; margin-bottom: 10px;"> Timer</h2>
+    <h1 id="heading">0</h1>
+    
+    <div class="timer-controls">
+      <button class="start-btn" onclick="StartTimer()">▶ Start</button>
+      <button class="stop-btn" onclick="StopTimer()">⏸ Stop</button>
+      <button class="reset-btn" onclick="ResetTimer()">↺ Reset</button>
+    </div>
+
+    <div class="timer-status" id="timerStatus">
+      Click Start to begin
+    </div>
+  </div>
+
+  <script>
+    let timer;
+    let count = 0;
+    let isRunning = false;
+    const heading = document.getElementById("heading");
+    const statusDiv = document.getElementById("timerStatus");
+
+    let StartTimer = function() {
+      if (!isRunning) {
+        timer = setInterval(function() {
+          count++;
+          heading.textContent = count;
+          heading.style.transform = 'scale(1.1)';
+          setTimeout(() => {
+            heading.style.transform = 'scale(1)';
+          }, 200);
+          statusDiv.textContent = 'Timer is running...';
+        }, 1000);
+        isRunning = true;
+      }
+    }
+
+    function StopTimer() {
+      clearInterval(timer);
+      isRunning = false;
+      statusDiv.textContent = 'Timer stopped at ' + count;
+    }
+
+    function ResetTimer() {
+      clearInterval(timer);
+      isRunning = false;
+      count = 0;
+      heading.textContent = count;
+      heading.style.animation = 'none';
+      heading.offsetHeight;
+      heading.style.animation = null;
+      statusDiv.textContent = 'Timer reset to 0';
+    }
+    // Click on timer number triggers arrow alert
+    heading.addEventListener("click", function() {
+      alertArr();
+      // Add a little bounce effect
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 200);
+    });
+
+    // Auto alert after 2 seconds (kept from original)
+    setTimeout(alertArr, 2000);
+
+    // Clean up timer when leaving page
+    window.addEventListener('beforeunload', function() {
+      if (timer) {
+        clearInterval(timer);
+      }
+    });
+  </script>
+</body>
+</html>

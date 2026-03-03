@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form with Array concpet</title>
+  <link rel="stylesheet" href="Array.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Form Section (Full Width) -->
+    <div class="form-section">
+      <div class="form-header">
+        <h2>Registration form</h2>
+        <p>Please fill in your details below</p>
+      </div>
+      
+      <form id="registrationForm"> 
+        <div class="form-row">
+          <div class="form-group">
+            <label>FULL NAME <span>*</span></label>
+            <input type="text" id="name" placeholder="John Smith" required/>
+          </div>
+          
+          <div class="form-group">
+            <label>EMAIL <span>*</span></label>
+            <input type="email" id="email" placeholder="john@company.com" required />
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>PASSWORD <span>*</span></label>
+            <input type="password" id="password" placeholder="Minimum 8 characters" required />
+          </div>
+          
+          <div class="form-group">
+            <label>DATE OF BIRTH</label>
+            <input type="date" id="dob" />
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>COUNTRY</label>
+            <select id="country">
+              <option value="USA">United States</option>
+              <option value="Canada">Canada</option>
+              <option value="UK">United Kingdom</option>
+              <option value="Australia">Australia</option>
+              <option value="Germany">Germany</option>
+              <option value="France">France</option>
+              <option value="India" selected>India</option>
+              <option value="Japan">Japan</option>
+              <option value="Korea">South Korea</option>
+              <option value="Iceland">Iceland</option>
+              <option value="Singapore">Singapore</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>AGE</label>
+            <input type="number" id="age" min="1" max="120" placeholder="25">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>PHONE NUMBER</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>ADDRESS</label>
+            <textarea id="address" rows="2" placeholder="Street address, city, postal code"></textarea>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>GENDER</label>
+            <div class="radio-group">
+              <div class="radio-options">
+                <label class="radio-label">
+                  <input type="radio" name="Gender" id="female" value="Female"> Female
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="Gender" id="male" value="Male"> Male
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group full-width">
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="agree" value="Agreed"/> 
+                I agree to the terms and conditions
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="button-group">
+          <button type="button" class="btn btn-primary" id="addEntryBtn">Submit</button>
+          <button type="reset" class="btn btn-secondary">Reset form</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Table Section (Below Form) -->
+    <div class="table-section">
+      <div class="table-header">
+        <h3>Stored Registrations</h3>
+        <div class="table-actions">
+          <button class="btn btn-outline" id="copyTableBtn">📋 Copy table</button>
+          <button class="btn btn-outline" id="downloadCsvBtn">⬇️ Download CSV</button>
+          <button class="btn btn-outline" id="clearTableBtn">🗑️ Clear all</button>
+        </div>
+      </div>
+      
+      <div class="table-container">
+        <table id="dataTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>DOB</th>
+              <th>Country</th>
+              <th>Age</th>
+              <th>Phone</th>
+              <th>Gender</th>
+              <th>Terms</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr class="empty-row">
+              <td colspan="8">No entries yet. Add your first registration above.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="table-footer">
+        <span id="entryCount">0 entries</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Array to store form data internally
+    let registrations = [];
+
+    // DOM elements
+    const form = document.getElementById('registrationForm');
+    const addBtn = document.getElementById('addEntryBtn');
+    const tableBody = document.getElementById('tableBody');
+    const entryCountSpan = document.getElementById('entryCount');
+    const copyBtn = document.getElementById('copyTableBtn');
+    const downloadBtn = document.getElementById('downloadCsvBtn');
+    const clearBtn = document.getElementById('clearTableBtn');
+
+    // Helper: get form values as an object
+    function getFormData() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const dob = document.getElementById('dob').value;
+      const country = document.getElementById('country').value;
+      const age = document.getElementById('age').value;
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      
+      // Gender
+      let gender = '';
+      if (document.getElementById('female').checked) gender = 'Female';
+      else if (document.getElementById('male').checked) gender = 'Male';
+      
+      // Terms
+      const termsAgreed = document.getElementById('agree').checked;
+
+      return {
+        name: name || 'Not provided',
+        email: email || 'Not provided',
+        password: password ? '••••••••' : 'Not provided',
+        dob: dob || 'Not provided',
+        country: country,
+        age: age || 'Not provided',
+        phone: phone || 'Not provided',
+        address: address || 'Not provided',
+        gender: gender || 'Not provided',
+        terms: termsAgreed ? 'Yes' : 'No'
+      };
+    }
+
+    // Validate required fields
+    function validateForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      
+      if (!name) {
+        alert('Full name is required');
+        return false;
+      }
+      if (!email) {
+        alert('Email is required');
+        return false;
+      }
+      if (!password) {
+        alert('Password is required');
+        return false;
+      }
+      if (!document.getElementById('agree').checked) {
+        alert('You must agree to the terms and conditions');
+        return false;
+      }
+      return true;
+    }
+
+    // Add current form data to the array and refresh table
+    function addEntryToTable() {
+      if (!validateForm()) return;
+      
+      const data = getFormData();
+      
+      registrations.push({
+        name: data.name,
+        email: data.email,
+        dob: data.dob,
+        country: data.country,
+        age: data.age,
+        phone: data.phone,
+        gender: data.gender,
+        terms: data.terms
+      });
+      
+      refreshTable();
+      
+      // Optional: Reset form after adding
+      form.reset();
+      // Reset country to default
+      document.getElementById('country').value = 'India';
+    }
+
+    // Refresh table display from array
+    function refreshTable() {
+      if (registrations.length === 0) {
+        tableBody.innerHTML = `<tr class="empty-row"><td colspan="8">No entries yet. Add your first registration above.</td></tr>`;
+        entryCountSpan.textContent = '0 entries';
+        return;
+      }
+      
+      let html = '';
+      registrations.forEach(reg => {
+        html += `<tr>
+          <td>${escapeHtml(reg.name)}</td>
+          <td>${escapeHtml(reg.email)}</td>
+          <td>${escapeHtml(reg.dob)}</td>
+          <td>${escapeHtml(reg.country)}</td>
+          <td>${escapeHtml(reg.age)}</td>
+          <td>${escapeHtml(reg.phone)}</td>
+          <td>${escapeHtml(reg.gender)}</td>
+          <td>${escapeHtml(reg.terms)}</td>
+        </tr>`;
+      });
+      
+      tableBody.innerHTML = html;
+      entryCountSpan.textContent = `${registrations.length} ${registrations.length === 1 ? 'entry' : 'entries'}`;
+    }
+
+    // Simple escape to prevent XSS
+    function escapeHtml(text) {
+      if (text === undefined || text === null) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Copy table to clipboard (as tab-separated values)
+    function copyTableToClipboard() {
+      if (registrations.length === 0) {
+        alert('No data to copy');
+        return;
+      }
+      
+      const headers = ['Name', 'Email', 'DOB', 'Country', 'Age', 'Phone', 'Gender', 'Terms'];
+      let csvContent = headers.join('\t') + '\n';
+      
+      registrations.forEach(reg => {
+        const row = [
+          reg.name,
+          reg.email,
+          reg.dob,
+          reg.country,
+          reg.age,
+          reg.phone,
+          reg.gender,
+          reg.terms
+        ].map(cell => cell.replace(/\t/g, ' '));
+        csvContent += row.join('\t') + '\n';
+      });
+      
+      navigator.clipboard.writeText(csvContent).then(() => {
+        alert('Table data copied to clipboard');
+      }).catch(err => {
+        alert('Failed to copy: ' + err);
+      });
+    }
+
+    // Download as CSV
+    function downloadAsCsv() {
+      if (registrations.length === 0) {
+        alert('No data to download');
+        return;
+      }
+      
+      const headers = ['Name', 'Email', 'DOB', 'Country', 'Age', 'Phone', 'Gender', 'Terms'];
+      let csvContent = headers.join(',') + '\n';
+      
+      registrations.forEach(reg => {
+        const row = [
+          `"${reg.name.replace(/"/g, '""')}"`,
+          `"${reg.email.replace(/"/g, '""')}"`,
+          `"${reg.dob.replace(/"/g, '""')}"`,
+          `"${reg.country.replace(/"/g, '""')}"`,
+          `"${reg.age.replace(/"/g, '""')}"`,
+          `"${reg.phone.replace(/"/g, '""')}"`,
+          `"${reg.gender.replace(/"/g, '""')}"`,
+          `"${reg.terms.replace(/"/g, '""')}"`
+        ].join(',');
+        csvContent += row + '\n';
+      });
+      
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'registrations.csv');
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Clear all entries
+    function clearAllEntries() {
+      if (registrations.length > 0 && confirm('Clear all registrations?')) {
+        registrations = [];
+        refreshTable();
+      }
+    }
+
+    // Event listeners
+    addBtn.addEventListener('click', addEntryToTable);
+    copyBtn.addEventListener('click', copyTableToClipboard);
+    downloadBtn.addEventListener('click', downloadAsCsv);
+    clearBtn.addEventListener('click', clearAllEntries);
+
+    // Set default country
+    window.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('country').value = 'India';
+    });
+  </script>
+</body>
+</html>

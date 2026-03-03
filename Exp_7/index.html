@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>∘ Experiment 7 index ∘</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #faf7f5;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            color: #2d2a2e;
+        }
+
+        /* soft blurred circles */
+        .circle-1 {
+            position: fixed;
+            top: -100px;
+            right: -50px;
+            width: 400px;
+            height: 400px;
+            background: #fde2e4;
+            border-radius: 50%;
+            opacity: 0.5;
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        .circle-2 {
+            position: fixed;
+            bottom: -80px;
+            left: -40px;
+            width: 350px;
+            height: 350px;
+            background: #e0e4f0;
+            border-radius: 50%;
+            opacity: 0.6;
+            filter: blur(90px);
+            z-index: -1;
+        }
+
+        .circle-3 {
+            position: fixed;
+            top: 40%;
+            left: 30%;
+            width: 300px;
+            height: 300px;
+            background: #f0e2f0;
+            border-radius: 50%;
+            opacity: 0.4;
+            filter: blur(100px);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* header */
+        .collection-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #9b8b9c;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+
+        .collection-header h1 {
+            font-size: 3.2rem;
+            font-weight: 350;
+            color: #2a262b;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .collection-header h1 span {
+            background: linear-gradient(135deg, #b89ab8, #8f8bb8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 400;
+        }
+
+        .divider {
+            width: 80px;
+            height: 1px;
+            background: #d4c9d4;
+            margin: 1.5rem auto 0;
+        }
+
+        /* grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        /* card */
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 30px 55px -12px rgba(90, 70, 110, 0.2);
+            transform: scale(1.02) translateY(-4px);
+        }
+
+        /* card header */
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.25rem;
+            filter: drop-shadow(2px 4px 8px rgba(140, 120, 140, 0.15));
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #332e37;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #aa9faf;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        /* description */
+        .desc {
+            color: #4f4956;
+            line-height: 1.7;
+            font-size: 1rem;
+            font-weight: 350;
+            margin-bottom: 2rem;
+            border-left: 2px solid #e2d7e2;
+            padding-left: 1.2rem;
+        }
+
+        /* crisp feature list */
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-list li {
+            color: #5f5768;
+            font-size: 0.95rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 350;
+        }
+
+        .feature-list li::before {
+            content: "·";
+            font-size: 1.8rem;
+            color: #bfaebf;
+            line-height: 0;
+        }
+
+        /* button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: white;
+            border: none;
+            border-radius: 2rem;
+            padding: 1rem 2.2rem;
+            font-size: 1rem;
+            color: #353039;
+            font-weight: 450;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(210, 190, 210, 0.4);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            width: fit-content;
+        }
+
+        .btn:hover {
+            background: white;
+            border-color: #cbbcd0;
+            gap: 1rem;
+            box-shadow: 0 8px 18px rgba(140, 120, 160, 0.1);
+        }
+
+        .btn-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover .btn-arrow {
+            transform: translateX(4px);
+        }
+
+        /* timer special */
+        .timer-number {
+            font-size: 3.5rem;
+            font-weight: 250;
+            color: #5d5365;
+            line-height: 1;
+            margin: 0.5rem 0 1rem;
+            font-feature-settings: "tnum";
+        }
+
+        .stat {
+            font-size: 0.9rem;
+            color: #988d9c;
+        }
+
+        /* responsive */
+        @media (max-width: 750px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .collection-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            body { padding: 1rem; }
+            .card { padding: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="circle-1"></div>
+    <div class="circle-2"></div>
+    <div class="circle-3"></div>
+
+    <div class="container">
+        <div class="collection-header">
+            <div class="eyebrow">Experiment 7 </div>
+            
+            <div class="divider"></div>
+        </div>
+
+        <div class="grid">
+            <!-- TIMER CARD -->
+            <div class="card">
+                <div class="card-icon">⏳</div>
+                <h2>Timer</h2>
+                <div class="subhead">tick · tock · done</div>
+                
+                <div class="desc">
+                    A soft, responsive timer that counts seconds with a gentle pulse.
+                     Pause, reset or let it run — simple and precise.
+                </div>
+
+                <!-- tiny static preview -->
+                <div style="font-family: monospace; color: #8d8093; margin-bottom: 1.8rem; font-size: 0.9rem;">
+                    <span class="stat">⟡ 0 · 1 · 2 · 3 …</span>
+                </div>
+
+                <a href="Exp_7.html" class="btn">
+                    <span>open timer</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+            </div>
+
+            <!-- REGISTRATION FORM CARD -->
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h2>Registration Form</h2>
+                <div class="subhead">array · store · export</div>
+
+                <div class="desc">
+                    Clean registration form that stores entries in an array. 
+                    Watch your data appear in the table below — export or copy anytime.
+                </div>
+
+                <!-- tiny preview tag -->
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.8rem;">
+                    <span style="background: rgba(220,210,230,0.3); padding: 0.2rem 1rem; border-radius: 30px; color: #5f5570; font-size: 0.8rem;">✶ array length: 0</span>
+                    <span style="background: rgba(220,210,230,0.3); padding: 0.2rem 1rem; border-radius: 30px; color: #5f5570; font-size: 0.8rem;">⬇︎ csv export</span>
+                </div>
+
+                <a href="Array.html" class="btn">
+                    <span>open form</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
