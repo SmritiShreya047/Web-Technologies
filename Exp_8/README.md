@@ -121,9 +121,5 @@ Create a professional-looking system information dashboard that showcases real P
 | Arrays & loops | 4 | indexed arrays, `foreach` |
 | String handling | 3 | quotes, concatenation |
 
-## 📚 What You'll Learn Beyond Code
 
-- **Security habits:** Never leave `phpinfo()` on a production server
-- **Debugging techniques:** Using `var_dump()` and `print_r()` effectively
-- **Server awareness:** Understanding document roots, script paths, and request lifecycle
-- **Environment differences:** XAMPP vs built-in server use cases
+
